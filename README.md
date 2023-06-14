@@ -74,3 +74,79 @@ This is the tutorial from GCP associate cloud engineering
 
 5. regions and zones example
     ![imgs](./imgs/Xnip2023-05-22_10-14-30.jpg)
+    
+
+
+<br><br><br><br><br><br><br><br>
+
+# 3. Google Compute Engine for Associate Cloud Engineer
+
+## 3.1 Google Compute engine fundamentals (GCE)
+1. create and manage lifecycle of virtual machine(VM) instances
+2. `load balancing` and `auto scaling` for multiple VM instances
+3. `attach storage` to your VM instance
+4. manage `network connectivity and configuration` for your VM instances
+5. Goal
+    - setup VM instances as HTTP server
+    - distribute load with load balancers
+- ![imgs](./imgs/Xnip2023-05-22_10-23-21.jpg)
+
+
+## 3.2 hands-on
+
+1. New VM instance
+2. understand differnt types and images in GCE
+    - Genearl Purpose (E2, N2, N2D, N1): best price-performance ratio
+        - web and application servers, small-medium databases, dev environments
+    - Memory Optimized(M2, M1): ultra high memory workloads
+        - large in-memory databases and in-memory analytics
+    - compute optimized (C2): compute intensive workloads
+        - gaming applications
+3. `e2-standard-2`
+    - e2 - machine type family
+    - standard - type of workload
+    - 2 - # of CPUs
+
+4. installing http webserver on gcp vm
+```bash
+$ whoami
+$ pwd
+$ ls
+$ sudo su
+
+# to update
+$ apt update
+
+# install apache2
+$ apt install apache2
+
+# go to the ip
+>> 10.176.12.23
+```
+![imgs](./imgs/Xnip2023-06-14_17-37-23.jpg)
+
+
+
+```bash
+$ cd /var/www/html
+
+$ echo "Hello world from $(hostname) $(hostname -u)" >> /var/www/html/index.html
+```
+
+5. Internal and External IP address
+- External(public) IP addresses are Internet addressable
+- Internal(private) IP addresses are internet to a corporate network
+```bash
+# stop apache2 service
+$ service apache2 stop
+
+# start apache2 service
+$ service apache2 start
+```
+
+6. static ip
+- use static ip address
+
+![imgs](./imgs/Xnip2023-06-14_18-14-52.jpg)
+
+- static ip can be switched to another VM instance in same project

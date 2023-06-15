@@ -3,6 +3,23 @@ This is the tutorial from GCP associate cloud engineering
 
 ![learning roadmap](./imgs/Xnip2023-05-22_09-24-09.jpg)
 
+
+# linux command
+
+```bash
+# 1. checking all running apps in linux
+# https://www.2daygeek.com/how-to-check-all-running-services-in-linux/
+$ service --status-all
+
+# 2. start apache2
+$ apt update
+$ apt install apache2
+$ service apache2 stop
+$ service apache2 start
+
+
+```
+
 <br><br><br><br><br><br><br><br>
 
 # Intro
@@ -149,4 +166,70 @@ $ service apache2 start
 
 ![imgs](./imgs/Xnip2023-06-14_18-14-52.jpg)
 
+
 - static ip can be switched to another VM instance in same project
+
+
+## 3.3 simplify web server setup
+
+1. simplify
+- `bootstarpping`: install OS patches or software when an VM instance is launched
+- configure a startup script
+```bash
+# use -y it will not ask question
+
+#!/bin/bash
+apt update
+apt -y install apache2
+echo "hello world from $(hostname) $(hostname -I)" >> /var/www/html/index.html
+```
+
+![imgs](./imgs/Xnip2023-06-14_18-38-13.jpg)
+
+
+
+2. creation with instance template
+- instance templates
+    - define machine type, image, labels, startup script
+    - provides a convenient way to create similar instances
+    - image family can be specified
+
+![imgs](./imgs/Xnip2023-06-14_18-44-05.jpg)
+
+
+- create from template
+![imgs](./imgs/Xnip2023-06-14_18-45-24.jpg)
+
+
+<br><br><br>
+
+3. Reducing launch time with custom image
+- installing OS patches and software at launch of VM instances increases boot up time
+- creating a custom image with OS patches and software pre-installed
+     - can be created from an instance, a persistent disk, a snapshot, another image or a file in Cloud storage
+     - can be shared across projects
+     - Deprecate old images
+     - Hardening an image - customize images to your corporate security standards
+
+
+stop instance while create an image
+![imgs](./imgs/Xnip2023-06-15_09-30-37.jpg)
+
+created custom image
+![imgs](./imgs/Xnip2023-06-15_09-40-56.jpg)
+
+
+
+
+copy from `instance templates` and select our custom image
+![imgs](./imgs/Xnip2023-06-15_09-42-49.jpg)
+
+
+and we dont need install apache2 any more as image already contains that. we need start it
+![imgs](./imgs/Xnip2023-06-15_09-44-32.jpg)
+
+<br><br><br>
+
+4. troubleshooting apache
+
+

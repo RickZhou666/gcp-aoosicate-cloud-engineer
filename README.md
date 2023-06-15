@@ -1,6 +1,8 @@
 # gpc-aoosicate-cloud-engineer
 This is the tutorial from GCP associate cloud engineering
 
+https://pplearn.udemy.com/course/google-cloud-certification-associate-cloud-engineer/learn/lecture/25121396#content
+
 ![learning roadmap](./imgs/Xnip2023-05-22_09-24-09.jpg)
 
 
@@ -228,8 +230,115 @@ copy from `instance templates` and select our custom image
 and we dont need install apache2 any more as image already contains that. we need start it
 ![imgs](./imgs/Xnip2023-06-15_09-44-32.jpg)
 
+
 <br><br><br>
 
 4. troubleshooting apache
 
 
+<br><br><br><br><br><br><br><br>
+
+# 4. Google compute - optimizing costs and performance in GCP
+
+## 4.1 save cost
+1. sustained use discounts
+    - applicable for instances by GKE and GCE
+2. committed use discounts
+    - commit for 1 year or 3 years
+    - up to 70% discount
+    - ![imgs](./imgs/Xnip2023-06-15_11-25-37.jpg)
+    
+
+3. saving costs with preemptible VMS
+    - short-lived cheaper (up to 80%) compute instance
+        - can be stopped by GCP any time within 24 hrs
+        - instances get 30s warning
+    - use preempty VM's if 
+        - you app are fault tolerant
+        - cost sensitive
+        - Not immediate 
+    - looks no more preemptible VMs
+        - ![imgs](./imgs/Xnip2023-06-15_11-37-23.jpg)
+        
+
+4. spot VMs
+    - latest version of preempitble VMS
+    - doesn't have maxinum runtime
+
+5. Billing
+    - billed by the second
+    - not billed for compute when a compute instance is stopped
+        - will be billed for any storage attached with it
+    - create budget to avoid amount
+    - ![imgs](./imgs/Xnip2023-06-15_13-51-32.jpg)
+    
+
+6. Live migration & availability policy
+    - keep VM running when a host system needs to be updated
+    - `Live migration`
+        - running instance is migrated to another host in the same zone
+    - important configuration
+        - on host maintenance
+            - Migrate: migrate VM instance to other hardware
+            - terminate: stop the VM intance 
+        - automatic restart
+    - ![imgs](./imgs/Xnip2023-06-15_14-01-17.jpg)
+    
+
+7. custom machine type
+
+    - ![imgs](./imgs/Xnip2023-06-15_14-05-40.jpg)
+    
+
+8. Compute Engine Features: GPUs
+    - accelerate math intensive and graphics-intensive workloads for AI/ML 
+    - add `GPU`
+        - high performance
+        - high cost
+        - use images with GPU libraries (otherwise, GPU will not be used)
+        - GPU restrictions
+            - not supported all machine types
+            - on host maintenance can only have the value 'terminate VM instance'
+    - General purpose
+        - N1 + add GPU
+    - GPUs
+
+9. VM in GCP
+    - VM associated with a project
+    - can only change machine type after stop the instance
+    - filter
+        - ![imgs](./imgs/Xnip2023-06-15_14-21-32.jpg)
+        
+    - Auto monitoring
+        - Default: CPU, network bytes, disk throughput/ IOPS
+        - Cloud monitoring agent: memory utilization & disk space utilization
+
+10. Best practices
+    - chose zone and region based on
+        - cost, regulations availability needs, latency and specific hardware needs
+        - distribute instances in multiple zones
+    - choose right machine type
+    - reserve for `committed use discounts` for constant workloads
+    - use preemptible instances for fault-tolerant
+    - use labels to indicate environment, team, business unit etc
+
+11. scenarios
+    - pre-requisites to be able to create a VM 
+        - project
+        - billing acct
+        - compute engines API
+    - dedicated hardware for your compliance, licensing and management needs
+        - sole-tenant nodes
+        - ![imgs](./imgs/Xnip2023-06-15_14-50-03.jpg)
+
+    - 1000s of VM to automate OS patch management, OS inventory management and OS configuration management
+        - VM manager
+        - ![imgs](./imgs/Xnip2023-06-15_14-55-36.jpg)
+
+    - login to VM intance to install software
+        - ssh to the instance
+
+    - dont expose VM to internet
+        - dont assign external IP address
+    - want to allow HTTP traffic to your VM
+        - configure firewall rules

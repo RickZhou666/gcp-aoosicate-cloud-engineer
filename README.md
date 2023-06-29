@@ -21,6 +21,14 @@ $ service apache2 start
 
 
 ```
+<br><br><br><br><br><br><br><br>
+
+# Tips
+## 1. difference between instance template and machine image
+1. instance template - build template from raw
+2. machine image - use current running instance as image
+3. https://www.youtube.com/watch?v=RvTJjD_l6Cs
+
 
 <br><br><br><br><br><br><br><br>
 
